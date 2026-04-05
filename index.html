@@ -3,55 +3,234 @@
 <head>
   <meta charset="UTF-8">
   <title>3D Models Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      text-align: center;
+    :root {
+      --bg: #0f1115;
+      --card: #1a1d24;
+      --accent: #4da3ff;
+      --text: #e6e6e6;
+      --subtext: #9aa4b2;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 60px 20px 30px;
+      text-align: center;
     }
 
     h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: var(--subtext);
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
       padding: 20px;
     }
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      padding: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
 
-    .gallery img {
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .card img {
       width: 100%;
-      border-radius: 10px;
-      transition: transform 0.2s;
+      display: block;
+      aspect-ratio: 4/3;
+      object-fit: cover;
     }
 
-    .gallery img:hover {
-      transform: scale(1.05);
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--subtext);
+      font-size: 0.9rem;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .lightbox.active {
+      display: flex;
     }
   </style>
 </head>
 <body>
 
-  <h1>My 3D Models</h1>
+<header>
+  <h1>3D Modeling Portfolio</h1>
+  <p class="subtitle">Selected works — product design, props, and functional models</p>
+</header>
 
+<div class="container">
   <div class="gallery">
-    <img src="./Car Key Fob Adapter.png">
-    <img src="./Cat Plushie.png">
-    <img src="./Ceiling Fan.png">
-    <img src="./Chair Collection.png">
-    <img src="./Corner Shelf.png">
-    <img src="./Corsair K70 Keyboard.png">
-    <img src="./Coway Air Filter Clip-on Vent.png">
-    <img src="./Double Window.png">
-    <img src="./Modular Tool storage Base.png">
-    <img src="./Modular Tool storage Clip-on Slot.png">
-    <img src="./Radiator.png">
-    <img src="./Wall Cable Clip.png">
+
+    <!-- Card -->
+    <div class="card" onclick="openLightbox('./Car Key Fob Adapter.png')">
+      <img src="./Car Key Fob Adapter.png">
+      <div class="card-content">
+        <div class="card-title">Car Key Fob Adapter</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openLightbox('./Cat Plushie.png')">
+      <img src="./Cat Plushie.png">
+      <div class="card-content">
+        <div class="card-title">Cat Plushie</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openLightbox('./Ceiling Fan.png')">
+      <img src="./Ceiling Fan.png">
+      <div class="card-content">
+        <div class="card-title">Ceiling Fan</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openLightbox('./Chair Collection.png')">
+      <img src="./Chair Collection.png">
+      <div class="card-content">
+        <div class="card-title">Chair Collection</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openLightbox('./Corner Shelf.png')">
+      <img src="./Corner Shelf.png">
+      <div class="card-content">
+        <div class="card-title">Corner Shelf</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openLightbox('./Corsair K70 Keyboard.png')">
+      <img src="./Corsair K70 Keyboard.png">
+      <div class="card-content">
+        <div class="card-title">Corsair K70 Keyboard</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openLightbox('./Coway Air Filter Clip-on Vent.png')">
+      <img src="./Coway Air Filter Clip-on Vent.png">
+      <div class="card-content">
+        <div class="card-title">Air Filter Clip-on Vent</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openLightbox('./Double Window.png')">
+      <img src="./Double Window.png">
+      <div class="card-content">
+        <div class="card-title">Double Window</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openLightbox('./Modular Tool storage Base.png')">
+      <img src="./Modular Tool storage Base.png">
+      <div class="card-content">
+        <div class="card-title">Tool Storage Base</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openLightbox('./Modular Tool storage Clip-on Slot.png')">
+      <img src="./Modular Tool storage Clip-on Slot.png">
+      <div class="card-content">
+        <div class="card-title">Tool Clip-on Slot</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openLightbox('./Radiator.png')">
+      <img src="./Radiator.png">
+      <div class="card-content">
+        <div class="card-title">Radiator</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openLightbox('./Wall Cable Clip.png')">
+      <img src="./Wall Cable Clip.png">
+      <div class="card-content">
+        <div class="card-title">Wall Cable Clip</div>
+      </div>
+    </div>
+
   </div>
+</div>
+
+<div class="footer">
+  © 2026 • 3D Modeling Portfolio
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img">
+</div>
+
+<script>
+  function openLightbox(src) {
+    const lightbox = document.getElementById("lightbox");
+    const img = document.getElementById("lightbox-img");
+    img.src = src;
+    lightbox.classList.add("active");
+  }
+
+  function closeLightbox() {
+    document.getElementById("lightbox").classList.remove("active");
+  }
+</script>
 
 </body>
 </html>
